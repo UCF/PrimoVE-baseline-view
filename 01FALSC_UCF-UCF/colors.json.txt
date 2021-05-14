@@ -1,0 +1,1 @@
+{"primary":"#FFCC00","secondary":"#000000","backgroundColor":"#ffffff","links":"#0000ff","warning":"#ff0000","positive":"#00b900","negative":"#808080","notice":"#ff9600"}
