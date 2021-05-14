@@ -28,6 +28,175 @@ app.component('prmSearchBookmarkFilterAfter', {
 //Auto generated code by primo app store DO NOT DELETE!!! -START-
 app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publishEvents": false, "helpMenuTitle": "Search Help", "helpMenuWidth": 500 }]);
 //Auto generated code by primo app store DO NOT DELETE!!! -END-
+
+/* start add hathi component */
+/////////////////////////////////////////////////////////////
+  app.component("hathiComponent", {
+    controller: "HathiController",
+    require: {
+      prmActionCtrl: "^prmActionList",
+    },
+    bindings: { parentCtrl: "<" },
+    template: `{{$ctrl.showHathiAction()}}`,
+  });
+
+  app.component("prmActionListAfter", {
+    template: "<hathi-component></hathi-component>",
+  });
+
+  app.controller("HathiController", [
+    function () {
+      var vm = this;
+      vm.showHathiAction = showHathiAction;
+
+      function getTitle() {
+        return getFirstValue(vm.prmActionCtrl.item.pnx.display.title);
+      }
+
+      function getISBN() {
+        return getFirstValue(vm.prmActionCtrl.item.pnx.addata.isbn);
+      }
+
+      function getOCLC() {
+        return getFirstOCLC(vm.prmActionCtrl.item.pnx.addata.oclcid);
+      }
+
+      function getAuthor() {
+        return getFirstValue(vm.prmActionCtrl.item.pnx.addata.au);
+      }
+
+      function getEdition() {
+        return getFirstValue(vm.prmActionCtrl.item.pnx.display.edition);
+      }
+
+      function getImprint() {
+        return (
+          getFirstValue(vm.prmActionCtrl.item.pnx.addata.pub) +
+          ", " +
+          getFirstValue(vm.prmActionCtrl.item.pnx.addata.date) +
+          "."
+        );
+      }
+
+      function getHathi() {
+        return getFirstHathiValue(vm.prmActionCtrl.item.pnx.display.lds62);
+      }
+
+      function getFirstValue(data) {
+        if (data) {
+          return data[0] ?? "";
+        } else {
+          return "";
+        }
+      }
+
+      function getFirstHathiValue(data) {
+        if (data) {
+          return data.find(element => element.includes("HATHI")) ?? "";
+        } else {
+          return "";
+        }
+      }
+
+      function getFirstOCLC(data) {
+        if (data) {
+          for (let i = 0; i < data.length; i++) {
+            let pos = data[i].toLowerCase().indexOf("(ocolc)");
+            if (pos >= 0) {
+              return data[i].substring(pos + 7);
+            }
+          }
+        } else {
+          return "";
+        }
+      }
+
+      function showHathiAction() {
+        if (vm.prmActionCtrl) {
+          this.action = {
+            name: "hathi_access",
+            label: "Hathi Accessible",
+            index: 0,
+            link: "https://alma-apps.flvc.org/alma-form-email/email.jsp?inst=UCF&bib=",
+            icon: {
+              icon: "ic_accessibility_24px",
+              iconSet: "action",
+              type: "svg",
+            },
+          };
+          if (getHathi() == "HATHI-IC" || getHathi() == "HATHI-OP") {
+            if (!actionExists(this.action, vm.prmActionCtrl)) {
+              vm.prmActionCtrl.actionListService.requiredActionsList.splice(
+                this.action.index,
+                0,
+                this.action.name
+              );
+              vm.prmActionCtrl.actionListService.actionsToIndex[
+                this.action.name
+              ] = this.action.index;
+              vm.prmActionCtrl.actionListService.onToggle[
+                this.action.name
+              ] = processLink(this.action);
+              vm.prmActionCtrl.actionListService.actionsToDisplay.unshift(
+                this.action.name
+              );
+
+              vm.prmActionCtrl.actionLabelNamesMap[
+                this.action.name
+              ] = this.action.label;
+              vm.prmActionCtrl.actionIconNamesMap[
+                this.action.name
+              ] = this.action.name;
+              vm.prmActionCtrl.actionIcons[this.action.name] = this.action.icon;
+            }
+          } else if (actionExists(this.action, vm.prmActionCtrl)) {
+            delete vm.prmActionCtrl.actionListService.actionsToIndex[
+              this.action.name
+            ];
+            delete vm.prmActionCtrl.actionListService.onToggle[
+              this.action.name
+            ];
+            let i = vm.prmActionCtrl.actionListService.actionsToDisplay.indexOf(
+              this.action.name
+            );
+            vm.prmActionCtrl.actionListService.actionsToDisplay.splice(i, 1);
+            i = vm.prmActionCtrl.actionListService.requiredActionsList.indexOf(
+              this.action.name
+            );
+            vm.prmActionCtrl.actionListService.requiredActionsList.splice(i, 1);
+            delete vm.prmActionCtrl.actionLabelNamesMap[this.action.name];
+            delete vm.prmActionCtrl.actionIconNamesMap[this.action.name];
+            delete vm.prmActionCtrl.actionIcons[this.action.name];
+          }
+        }
+      }
+
+      function actionExists(action, ctrl) {
+        return ctrl.actionListService.actionsToIndex.hasOwnProperty(
+          action.name
+        );
+      }
+
+      function processLink(action) {
+        let processedLink = (action.link +=
+          encodeURIComponent(getTitle()) +
+          ";;;" +
+          encodeURIComponent(getAuthor()) +
+          ";;;" +
+          encodeURIComponent(getImprint()) +
+          ";;;" +
+          encodeURIComponent(getEdition()) +
+          ";;;" +
+          encodeURIComponent(getISBN()) +
+          ";;;" +
+          encodeURIComponent(getOCLC()));
+        return () => window.open(processedLink, "_blank");
+      }
+    },
+  ]);
+  /* end add hathi component */
+  ////////////////////////////////////////////////////////////
+
 })();
 
 
