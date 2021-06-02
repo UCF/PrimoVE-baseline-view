@@ -927,9 +927,9 @@ max-width: 140px;
 }
 
 /* Set Login Dialog Box text to white */
-.light-on-dark-dialog .md-button {
+/* .light-on-dark-dialog .md-button {
     color: #fff !important;
-}
+} */
 
 /* Hide the Navigation to page sections */
 .services-index-under.hide-xs {
