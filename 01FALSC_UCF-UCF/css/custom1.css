@@ -948,3 +948,8 @@ display:none;}
 .md-select-menu-container.md-active md-select-menu>*, .md-select-menu-container.md-active md-select-menu {
   max-height: 500px;
 }
+
+/* Mobile menu link color override */
+prm-main-menu[menu-type=full] .md-button .md-headline, prm-main-menu[menu-type=full] .overlay-menu-item .md-headline {
+  color: #ffcc00;
+}
