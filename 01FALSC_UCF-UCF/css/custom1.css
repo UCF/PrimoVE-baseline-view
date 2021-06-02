@@ -939,3 +939,12 @@ max-width: 140px;
 /* Hide BX Recommender */
  prm-recomendations {
 display:none;}
+
+/* Right menu white text color override */
+.hoverable-over-dark:not(.disable-hover), .md-button.button-over-dark:not(.disable-hover), prm-main-menu[menu-type=full] .md-button.md-focused:not(.disable-hover), prm-main-menu[menu-type=full] .md-button .md-input-container-dummy>.md-select-dummy:not(.disable-hover):focus, prm-main-menu[menu-type=full] .md-button:not(.disable-hover):focus, prm-main-menu[menu-type=full] .md-button:not(.disable-hover):hover, prm-main-menu[menu-type=full] .md-button md-select:not(.disable-hover):focus, prm-main-menu[menu-type=full] .overlay-menu-item.md-focused:not(.disable-hover), prm-main-menu[menu-type=full] .overlay-menu-item .md-input-container-dummy>.md-select-dummy:not(.disable-hover):focus, prm-main-menu[menu-type=full] .overlay-menu-item:not(.disable-hover):focus, prm-main-menu[menu-type=full] .overlay-menu-item:not(.disable-hover):hover, prm-main-menu[menu-type=full] .overlay-menu-item md-select:not(.disable-hover):focus, prm-main-menu[menu-type=full] md-button:not(.disable-hover):focus, prm-main-menu[menu-type=full] md-button:not(.disable-hover):hover, prm-topbar .md-button:not(.disable-hover), prm-user-area .md-button.user-menu-button:not(.disable-hover), prm-user-area md-fab-toolbar ._md-fab-action-item .md-button:not(.disable-hover), prm-user-area md-fab-toolbar ._md-fab-action-item md-input-container:not(.disable-hover), prm-user-area md-fab-toolbar .md-fab-action-item .md-button:not(.disable-hover), prm-user-area md-fab-toolbar .md-fab-action-item md-input-container:not(.disable-hover) {
+  color: #000;
+}
+ /* Enlarge the drop down menus to show everything */
+.md-select-menu-container.md-active md-select-menu>*, .md-select-menu-container.md-active md-select-menu {
+  max-height: 500px;
+}
