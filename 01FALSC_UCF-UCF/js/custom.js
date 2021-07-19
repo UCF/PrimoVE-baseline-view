@@ -1,3 +1,7 @@
+var js = document.createElement('script');
+js.src = "//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+document.head.appendChild(js);
+
 (function(){
 "use strict";
 'use strict';
@@ -29,8 +33,87 @@ app.component('prmSearchBookmarkFilterAfter', {
 app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publishEvents": false, "helpMenuTitle": "Search Help", "helpMenuWidth": 500 }]);
 //Auto generated code by primo app store DO NOT DELETE!!! -END-
 
-/* start add hathi component */
-/////////////////////////////////////////////////////////////
+  /* start from-library component */
+
+  app.component('prmRequestAfter', {
+      bindings: { parentCtrl: '<' },
+      controller: function($scope) {
+          var myVar = setInterval(activateFilter, 2000);
+
+          function activateFilter() {
+
+              $('md-select[name="owner"]').parent().hide()
+
+              var pickUpLocations = ["UCF Main Library",
+                      "UCF Downtown Library",
+                      "UCF West Orlando",
+                      "UCF Rosen",
+                      "UCF Daytona Beach",
+                      "UCF Sanford/Lake Mary",
+                      "UCF Cocoa",
+                      "Distant Learner"];
+
+              var owners = ["RES_SHARE",
+                      "CFWTN",
+                      "CFMTN",
+                      "RES_SHARE",
+                      "CFDBG",
+                      "CFSLM",
+                      "CFBCC",
+                      "RES_SHARE"];
+
+              var defaultOwnerCode = "RES_SHARE";
+              
+              var ownerCode = $scope.$ctrl.parentCtrl.requestService._formData.owner;
+              var ownerCodeUser = "";
+              var pickupLocationCode = $scope.$ctrl.parentCtrl.requestService._formData.preferredLocalPickupLocation;
+              var form = $scope.$ctrl.parentCtrl.requestService._form;
+              var pickupLocationLabel = "";
+              var index = -1;
+
+              if (ownerCode != null && pickupLocationCode != null && form != null && form.length > 20) {
+                  
+                  //Get label corresponding to pickup location code set in form
+                  for (let i = 0; i < form.length; i++) {
+                      var formEntry = form[i];
+                      if (formEntry.key == "preferredLocalPickupLocation") {
+                          for (let j = 0; j < formEntry.options.length; j++) {
+                              if (formEntry.options[j].value == pickupLocationCode) {
+                                  pickupLocationLabel = formEntry.options[j].label;
+                              }
+                          }
+                      }
+                  }
+
+                  //Get index of matching entry in internal lookup table
+                  for (let i = 0; i < pickUpLocations.length; i++) {
+                      if (pickupLocationLabel.startsWith(pickUpLocations[i])) {
+                          index = i;
+                          break;
+                      }
+                  }
+
+                  if (index > -1)
+                  {
+                      ownerCodeUser = owners[index];
+                  }
+                  else
+                  {
+                      ownerCodeUser = defaultOwnerCode;
+                  }
+                  
+                  if (ownerCode != ownerCodeUser && ownerCodeUser != "") {
+                      $scope.$ctrl.parentCtrl.requestService._formData.owner = ownerCodeUser;
+                  }
+              }
+          }
+      }
+  });
+
+  /* end from-library component */
+
+  /* start add hathi component */
+  /////////////////////////////////////////////////////////////
   app.component("hathiComponent", {
     controller: "HathiController",
     require: {
