@@ -51,7 +51,7 @@ app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publ
                       "UCF Daytona Beach",
                       "UCF Sanford/Lake Mary",
                       "UCF Cocoa",
-                      "Distant Learner"];
+                      "Distance Learner"];
 
               var owners = ["RES_SHARE",
                       "CFWTN",
