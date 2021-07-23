@@ -280,6 +280,20 @@ app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publ
   /* end add hathi component */
   ////////////////////////////////////////////////////////////
 
+  /* Start Collapse "Get It From Other Institutions" dropdown by default in full record display. */
+  app.component("prmAlmaOtherMembersAfter", { 
+    bindings: { 
+      parentCtrl: "<", 
+    }, 
+    controller: [ 
+      function () { 
+        var ctrl = this; 
+        ctrl.parentCtrl.isCollapsed = true; 
+      }, 
+    ], 
+  }); 
+  /* End Collapse "Get It From Other Institutions" */
+
 })();
 
 
@@ -289,17 +303,3 @@ app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publ
     x.src = (document.location.protocol === "https:" ? "https://" : "https://") + "us.libraryh3lp.com/js/libraryh3lp.js?34335"
     var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
   })();
-
-
-  /* Collapse "Get It From Other Institutions" dropdown by default in full record display. */
-app.component("prmAlmaOtherMembersAfter", { 
-  bindings: { 
-    parentCtrl: "<", 
-  }, 
-  controller: [ 
-    function () { 
-      var ctrl = this; 
-      ctrl.parentCtrl.isCollapsed = true; 
-    }, 
-  ], 
-}); 
