@@ -873,10 +873,6 @@ md-list.prm-list.prm-linkable-list-items .md-button.arrow-link-button md-list-it
     color: black; }
 
 /* primary color hook end*/
-prm-no-search-result > md-card {
-    display:none;
-}
-
 
 
 /*---------------Hover Background Color --------------------------*/
