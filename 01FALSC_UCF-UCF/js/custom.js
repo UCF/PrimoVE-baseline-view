@@ -294,12 +294,21 @@ app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publ
   }); 
   /* End Collapse "Get It From Other Institutions" */
 
+/*----------below is the code for LibraryH3lp-----------*/
+  var needsJs = document.createElement('div');
+  needsJs.setAttribute('class', 'needs-js');
+  var sidebar = document.querySelector('md-content.main .flex-order-4');
+  if (sidebar) {
+    sidebar.appendChild(needsJs);
+    var s = document.createElement('script');
+    s.id = 'localScript';
+    s.src = 'https://libraryh3lp.com/js/libraryh3lp.js?17668';
+    document.body.appendChild(s);
+  }
+/*---------------LibraryH3lp code ends here---------------*/
+
+
 })();
 
 
-// libraryh3lp chat box code
-(function() {
-    var x = document.createElement("script"); x.type = "text/javascript"; x.async = true;
-    x.src = (document.location.protocol === "https:" ? "https://" : "https://") + "us.libraryh3lp.com/js/libraryh3lp.js?34335"
-    var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
-  })();
+
