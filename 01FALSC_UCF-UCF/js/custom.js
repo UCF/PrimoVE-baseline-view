@@ -295,16 +295,29 @@ app.constant('primoExploreHelpMenuStudioConfig', [{ "logToConsole": false, "publ
   /* End Collapse "Get It From Other Institutions" */
 
 /*----------below is the code for LibraryH3lp-----------*/
-  var needsJs = document.createElement('div');
-  needsJs.setAttribute('class', 'needs-js');
-  var sidebar = document.querySelector('md-content.main .flex-order-4');
-  if (sidebar) {
-    sidebar.appendChild(needsJs);
+var lh3EmbedAttempts = 0;
+var needsJs, primoSidebars;
+function addLH3Snippet() {
+  primoSidebars = document.querySelectorAll('md-content.main .flex-order-4, prm-full-view#fullView .full-view-spacer');
+  if (primoSidebars.length > 0) {
+    primoSidebars.forEach(sidebar => {
+      needsJs = document.createElement('div');
+      needsJs.setAttribute('class', 'needs-js');
+      sidebar.appendChild(needsJs);
+    });
+
     var s = document.createElement('script');
     s.id = 'localScript';
     s.src = 'https://libraryh3lp.com/js/libraryh3lp.js?17668';
     document.body.appendChild(s);
+  } else {
+    lh3EmbedAttempts++;
+    if (lh3EmbedAttempts < 12) { // Try every 5 seconds for a minute, then give up.
+      setTimeout(addLH3Snippet, 5 * 1000);
+    }
   }
+}
+addLH3Snippet();
 /*---------------LibraryH3lp code ends here---------------*/
 
 
